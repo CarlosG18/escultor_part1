@@ -3,15 +3,34 @@
 /*Sculptor::Sculptor()
 {
     //ctor
-}
+}*/
 
 Sculptor::~Sculptor()
 {
-    //dtor
-}*/
+    delete [] m[0][0];
+    delete [] m[0];
+    delete [] m;
+}
 
-Sculptor::Sculptor(int _nx, int _ny, int _nz){ //alocando a matriz 3d dinamicamente
+Sculptor::Sculptor(int _nx, int _ny, int _nz){
+  int i;
+  
+  this->nz = _nz;
+  this->ny = _ny;
+  this->nx = _nx;
 
+  	//alocando dinamicamente a matriz 3d
+  	m = (Voxel***) new Voxel[nz];
+	m[0] = (Voxel**) new Voxel[nz*nx];
+	m[0][0] = new Voxel[nz*nx*ny];
+	
+	//ajustando os endereços
+	for(i=1;i<nz;i++){
+		m[i] = m[i-1] + ny;
+	}
+	for(i=1; i<nz*ny;i++){
+		m[0][i] = m[0][i-1] + nx;
+	}
 }
 
 void Sculptor::setColor(float r, float g, float b, float a){
