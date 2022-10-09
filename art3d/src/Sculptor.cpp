@@ -31,6 +31,19 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz){
 	for(i=1; i<nz*ny;i++){
 		m[0][i] = m[0][i-1] + nx;
 	}
+
+	//set padrao de cada elemento de Voxel
+	for(i=0; i<nz; i++){
+		for(j=0; j<ny; j++){
+			for(k=0; k<nx; k++){
+				m[i][j][k].r = 255;
+				m[i][j][k].g = 255;
+				m[i][j][k].b = 255;
+				m[i][j][k].a = 1.0;
+				m[i][j][k].isOn = false;
+			}
+		}
+	}
 }
 
 void Sculptor::setColor(float r, float g, float b, float a){
