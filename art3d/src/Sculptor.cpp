@@ -7,9 +7,9 @@
 
 Sculptor::~Sculptor()
 {
-    delete [] m[0][0];
-    delete [] m[0];
-    delete [] m;
+    delete [] v[0][0];
+    delete [] v[0];
+    delete [] v;
 }
 
 Sculptor::Sculptor(int _nx, int _ny, int _nz){
@@ -20,27 +20,27 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz){
   this->nx = _nx;
 
   	//alocando dinamicamente a matriz 3d
-  	m = (Voxel***) new Voxel[nz];
-	m[0] = (Voxel**) new Voxel[nz*nx];
-	m[0][0] = new Voxel[nz*nx*ny];
+  	v (Voxel***) new Voxel[nz];
+	v[0] = (Voxel**) new Voxel[nz*nx];
+	v[0][0] = new Voxel[nz*nx*ny];
 	
 	//ajustando os endereços
 	for(i=1;i<nz;i++){
-		m[i] = m[i-1] + ny;
+		v[i] = v[i-1] + ny;
 	}
 	for(i=1; i<nz*ny;i++){
-		m[0][i] = m[0][i-1] + nx;
+		v[0][i] = v[0][i-1] + nx;
 	}
 
 	//set padrao de cada elemento de Voxel
 	for(i=0; i<nz; i++){
 		for(j=0; j<ny; j++){
 			for(k=0; k<nx; k++){
-				m[i][j][k].r = 255;
-				m[i][j][k].g = 255;
-				m[i][j][k].b = 255;
-				m[i][j][k].a = 1.0;
-				m[i][j][k].isOn = false;
+				v[i][j][k].r = 255;
+				v[i][j][k].g = 255;
+				v[i][j][k].b = 255;
+				v[i][j][k].a = 1.0;
+				v[i][j][k].isOn = false;
 			}
 		}
 	}
