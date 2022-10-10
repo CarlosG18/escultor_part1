@@ -13,7 +13,7 @@ Sculptor::~Sculptor()
 }
 
 Sculptor::Sculptor(int _nx, int _ny, int _nz){
-  int i;
+  int i,j,k;
   
   this->nz = _nz;
   this->ny = _ny;
