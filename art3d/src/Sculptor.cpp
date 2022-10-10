@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Sculptor.h"
 
 /*Sculptor::Sculptor()
@@ -13,17 +14,19 @@ Sculptor::~Sculptor()
 }
 
 Sculptor::Sculptor(int _nx, int _ny, int _nz){
+
+
   int i,j,k;
-  
+
   this->nz = _nz;
   this->ny = _ny;
   this->nx = _nx;
 
   	//alocando dinamicamente a matriz 3d
-  	v (Voxel***) new Voxel[nz];
+  	v = (Voxel***) new Voxel[nz];
 	v[0] = (Voxel**) new Voxel[nz*nx];
 	v[0][0] = new Voxel[nz*nx*ny];
-	
+
 	//ajustando os endereços
 	for(i=1;i<nz;i++){
 		v[i] = v[i-1] + ny;
@@ -47,27 +50,68 @@ Sculptor::Sculptor(int _nx, int _ny, int _nz){
 }
 
 void Sculptor::setColor(float r, float g, float b, float a){
-
+    this->r = r;
+    this->g = g;
+    this->b = b;
+    this->a = a;
 }
 
 void Sculptor::putVoxel(int x, int y, int z){
-
+    v[z][y][x].isOn = true;
+    v[z][y][x].r = r;
+    v[z][y][x].g = g;
+    v[z][y][x].b = b;
+    v[z][y][x].a = a;
 }
 
 void Sculptor::cutVoxel(int x, int y, int z){
-
+    v[z][y][x].isOn = false;
 }
 
 void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1){
+    int i,j,k;
 
+    for(k=z0; k<z1; k++){
+        for(j=y0; j<y1; j++){
+            for(i=x0; i<x1; i++){
+                v[k][j][i].isOn = true;
+                v[k][j][i].r = r;
+                v[k][j][i].g = g;
+                v[k][j][i].b = b;
+                v[k][j][i].a = a;
+            }
+        }
+    }
 }
 
 void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
+    int i,j,k;
 
+    for(k=z0; k<z1; k++){
+        for(j=y0; j<y1; j++){
+            for(i=x0; i<x1; i++){
+                v[k][j][i].isOn = false;
+            }
+        }
+    }
 }
 
 void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius){
+    int i,j,k;
 
+    for(k=z0; k<z1; k++){
+        for(j=y0; j<y1; j++){
+            for(i=x0; i<x1; i++){
+                if(){ //faltando o argumento
+                    v[k][j][i].isOn = true;
+                    v[k][j][i].r = r;
+                    v[k][j][i].g = g;
+                    v[k][j][i].b = b;
+                    v[k][j][i].a = a;
+                }
+            }
+        }
+    }
 }
 
 void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius){
@@ -85,3 +129,8 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 void Sculptor::writeOFF(const char* filename){
 
 }
+
+void Sculptor::print_pro(int x, int y, int z){
+    std::cout << "propriedades do elemento de voxel v[" << z << "][" << y << "][" << x << "] = " << "isOn = " << v[z][y][x].isOn << " r = " << v[z][y][x].r << " g = " << v[z][y][x].g << " b = " << v[z][y][x].b << " a = " << v[z][y][x].a;
+}
+
