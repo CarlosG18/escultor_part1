@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Sculptor.h"
 
 /*Sculptor::Sculptor()
@@ -71,9 +72,9 @@ void Sculptor::cutVoxel(int x, int y, int z){
 void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1){
     int i,j,k;
 
-    for(k=z0; k<z1; k++){
-        for(j=y0; j<y1; j++){
-            for(i=x0; i<x1; i++){
+    for(k=z0; k<=z1; k++){
+        for(j=y0; j<=y1; j++){
+            for(i=x0; i<=x1; i++){
                 v[k][j][i].isOn = true;
                 v[k][j][i].r = r;
                 v[k][j][i].g = g;
@@ -97,21 +98,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
 }
 
 void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius){
-    int i,j,k;
 
-    for(k=z0; k<z1; k++){
-        for(j=y0; j<y1; j++){
-            for(i=x0; i<x1; i++){
-                if(){ //faltando o argumento
-                    v[k][j][i].isOn = true;
-                    v[k][j][i].r = r;
-                    v[k][j][i].g = g;
-                    v[k][j][i].b = b;
-                    v[k][j][i].a = a;
-                }
-            }
-        }
-    }
 }
 
 void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius){
@@ -127,7 +114,27 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 }
 
 void Sculptor::writeOFF(const char* filename){
+    int i,j,k,cont = 0;
 
+    std::ofstream file;
+    file.open(filename);
+
+    file << "OFF" << std::endl;
+
+    for(k=0;k<nz;k++){
+        std::cout << " face - " << k << std::endl;
+        for(j=0;j<ny;j++){
+            for(i=0;i<nx;i++){
+            std::cout << v[k][j][i].isOn;
+                if(v[k][j][i].isOn == true){
+                    cont++;
+                    file << k-0.5 << " " << j+0.5 << " " << i-0.5 << std::endl;
+                }
+            }
+        }
+    }
+    std::cout << " contador - " << cont;
+    file.close();
 }
 
 void Sculptor::print_pro(int x, int y, int z){
