@@ -6,14 +6,14 @@ using namespace std;
 
 int main()
 {
-    Sculptor s(20,20,20);
+    Sculptor s(3,3,5);
     s.setColor(100,250,75,1.0);
-    s.putBox(0,10,2,5,3,3);
+    s.putBox(1,2,1,2,0,4);
 
-    s.print_pro(1,1,1);
-    //std::cout << " " << std::endl;
-    //s.print_pro(1,0,0);
+    //s.print_pro(1,1,1);
+    s.writeOFF("./outputs/teste2.txt");
 
 
     return 0;
 }
+
