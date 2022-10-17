@@ -115,11 +115,14 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 
 void Sculptor::writeOFF(const char* filename){
     int i,j,k,cont = 0;
+    int n_v = 8*(nz*ny*nx), n_f = 6*(nz*ny*nx);
 
     std::ofstream file;
     file.open(filename);
 
     file << "OFF" << std::endl;
+    //colocando o numero de Nverticies NFaces  NArestas
+    file << n_v << " " << n_f << " 0" << std::endl;
 
     for(k=0;k<nz;k++){
         std::cout << " face - " << k << std::endl;
