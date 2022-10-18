@@ -11,7 +11,7 @@ int main()
     s.putBox(1,2,1,2,0,4);
 
     //s.print_pro(1,1,1);
-    s.writeOFF("./outputs/teste2.txt");
+    s.writeOFF("teste2.txt");
 
 
     return 0;
