@@ -115,7 +115,7 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 
 void Sculptor::writeOFF(const char* filename){
     int i,j,k,cont = 0;
-    int n_v = 8*(nz*ny*nx), n_f = 6*(nz*ny*nx);
+    //int n_v = 8*(nz*ny*nx), n_f = 6*(nz*ny*nx); - so e preciso colocar o que aparece
 
     std::ofstream file;
     file.open(filename);
@@ -132,6 +132,27 @@ void Sculptor::writeOFF(const char* filename){
                 if(v[k][j][i].isOn == true){
                     cont++;
                     file << k-0.5 << " " << j+0.5 << " " << i-0.5 << std::endl;
+                    file << k-0.5 << " " << j-0.5 << " " << i-0.5 << std::endl;
+                    file << k+0.5 << " " << j-0.5 << " " << i-0.5 << std::endl;
+                    file << k+0.5 << " " << j+0.5 << " " << i-0.5 << std::endl;
+                    file << k-0.5 << " " << j+0.5 << " " << i+0.5 << std::endl;
+                    file << k-0.5 << " " << j-0.5 << " " << i+0.5 << std::endl;
+                    file << k+0.5 << " " << j-0.5 << " " << i+0.5 << std::endl;
+                    file << k+0.5 << " " << j+0.5 << " " << i+0.5 << std::endl;
+                }
+            }
+        }
+    }
+    for(k=0;k<nz;k++){
+        for(j=0;j<ny;j++){
+            for(i=0;i<nx;i++){
+                if(v[k][j][i].isOn == true){
+                    file << "4" << " 0" << " 3" << " 2" << " 1 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                    file << "4" << " 4" << " 5" << " 6" << " 7 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                    file << "4" << " 0" << " 1" << " 5" << " 4 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                    file << "4" << " 0" << " 4" << " 7" << " 3 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                    file << "4" << " 3" << " 7" << " 6" << " 2 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                    file << "4" << " 1" << " 2" << " 6" << " 5 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
                 }
             }
         }
