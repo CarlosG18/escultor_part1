@@ -26,7 +26,6 @@ class Sculptor
       void putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
       void cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz);
       void writeOFF(const char* filename);
-      void print_pro(int x, int y, int z); //nao pertence apenas para teste
 };
 
 #endif // SCULPTOR_H
