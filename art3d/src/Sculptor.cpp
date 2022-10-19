@@ -161,7 +161,3 @@ void Sculptor::writeOFF(const char* filename){
     file.close();
 }
 
-void Sculptor::print_pro(int x, int y, int z){
-    std::cout << "propriedades do elemento de voxel v[" << z << "][" << y << "][" << x << "] = " << "isOn = " << v[z][y][x].isOn << " r = " << v[z][y][x].r << " g = " << v[z][y][x].g << " b = " << v[z][y][x].b << " a = " << v[z][y][x].a;
-}
-
