@@ -114,23 +114,34 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 }
 
 void Sculptor::writeOFF(const char* filename){
-    int i,j,k,cont = 0;
-    //int n_v = 8*(nz*ny*nx), n_f = 6*(nz*ny*nx); - so e preciso colocar o que aparece
+    int i,j,k,l,cont = 0;
+    int n_v, n_f;
 
     std::ofstream file;
     file.open(filename);
+
+    for(k=0;k<nz;k++){
+        for(j=0;j<ny;j++){
+            for(i=0;i<nx;i++){
+                if(v[k][j][i].isOn == true){
+                    cont++;
+                }
+            }
+        }
+    }
+
+    n_v = 8 * cont;
+    n_f = 6 * cont;
 
     file << "OFF" << std::endl;
     //colocando o numero de Nverticies NFaces  NArestas
     file << n_v << " " << n_f << " 0" << std::endl;
 
+    //verticies
     for(k=0;k<nz;k++){
-        std::cout << " face - " << k << std::endl;
         for(j=0;j<ny;j++){
             for(i=0;i<nx;i++){
-            std::cout << v[k][j][i].isOn;
                 if(v[k][j][i].isOn == true){
-                    cont++;
                     file << k-0.5 << " " << j+0.5 << " " << i-0.5 << std::endl;
                     file << k-0.5 << " " << j-0.5 << " " << i-0.5 << std::endl;
                     file << k+0.5 << " " << j-0.5 << " " << i-0.5 << std::endl;
@@ -143,21 +154,25 @@ void Sculptor::writeOFF(const char* filename){
             }
         }
     }
-    for(k=0;k<nz;k++){
-        for(j=0;j<ny;j++){
-            for(i=0;i<nx;i++){
-                if(v[k][j][i].isOn == true){
-                    file << "4" << " 0" << " 3" << " 2" << " 1 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                    file << "4" << " 4" << " 5" << " 6" << " 7 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                    file << "4" << " 0" << " 1" << " 5" << " 4 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                    file << "4" << " 0" << " 4" << " 7" << " 3 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                    file << "4" << " 3" << " 7" << " 6" << " 2 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                    file << "4" << " 1" << " 2" << " 6" << " 5 " << v[k][j][i].r << " " << v[k][j][i].g << " " << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+
+    //planos
+    for(l=0;l<cont; l++){
+        for(k=0;k<nz;k++){
+            for(j=0;j<ny;j++){
+                for(i=0;i<nx;i++){
+                    if(v[k][j][i].isOn == true){
+                      file << "4 " << (8*l)+0 << " " << (8*l)+3 << " " << (8*l)+2 << " " << (8*l)+1 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+4 << " " << (8*l)+5 << " " << (8*l)+6 << " " << (8*l)+7 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+0 << " " << (8*l)+1 << " " << (8*l)+5 << " " << (8*l)+4 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+0 << " " << (8*l)+4 << " " << (8*l)+7 << " " << (8*l)+3 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+3 << " " << (8*l)+7 << " " << (8*l)+6 << " " << (8*l)+2 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+1 << " " << (8*l)+2 << " " << (8*l)+6 << " " << (8*l)+5 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                    }
                 }
             }
         }
     }
-    std::cout << " contador - " << cont;
     file.close();
 }
+
 
