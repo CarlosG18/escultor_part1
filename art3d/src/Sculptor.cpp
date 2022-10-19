@@ -88,9 +88,9 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1){
 void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
     int i,j,k;
 
-    for(k=z0; k<z1; k++){
-        for(j=y0; j<y1; j++){
-            for(i=x0; i<x1; i++){
+    for(k=z0; k<=z1; k++){
+        for(j=y0; j<=y1; j++){
+            for(i=x0; i<=x1; i++){
                 v[k][j][i].isOn = false;
             }
         }
@@ -98,23 +98,71 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
 }
 
 void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius){
+   int i,j,k;
 
+    for(k=0; k<nz; k++){
+        for(j=0; j<ny; j++){
+            for(i=0; i<nx; i++){
+                if((((i-xcenter)*(i-xcenter))+((j-ycenter)*(j-ycenter))+((k-zcenter)*(k-zcenter))) <= ((radius)*(radius))){
+                    v[k][j][i].isOn = true;
+                    v[k][j][i].r = r;
+                    v[k][j][i].g = g;
+                    v[k][j][i].b = b;
+                    v[k][j][i].a = a;
+                }
+            }
+        }
+    }
 }
 
 void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius){
+    int i,j,k;
 
+    for(k=0; k<nz; k++){
+        for(j=0; j<ny; j++){
+            for(i=0; i<nx; i++){
+                if((((i-xcenter)*(i-xcenter))+((j-ycenter)*(j-ycenter))+((k-zcenter)*(k-zcenter))) <= ((radius)*(radius))){
+                    v[k][j][i].isOn = false;
+                }
+            }
+        }
+    }
 }
 
 void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
+    int i,j,k;
 
+    for(k=0; k<nz; k++){
+        for(j=0; j<ny; j++){
+            for(i=0; i<nx; i++){
+                if(((((i-xcenter)/rx))*((i-xcenter)/rx))+(((j-ycenter)/ry)*((j-ycenter)/ry))+((((k-zcenter)/rz))*(((k-zcenter)/rz))) == 1 ){
+                    v[k][j][i].isOn = true;
+                    v[k][j][i].r = r;
+                    v[k][j][i].g = g;
+                    v[k][j][i].b = b;
+                    v[k][j][i].a = a;
+                }
+            }
+        }
+    }
 }
 
 void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz){
+    int i,j,k;
 
+    for(k=0; k<nz; k++){
+        for(j=0; j<ny; j++){
+            for(i=0; i<nx; i++){
+                if(((((i-xcenter)/rx))*((i-xcenter)/rx))+(((j-ycenter)/ry)*((j-ycenter)/ry))+((((k-zcenter)/rz))*(((k-zcenter)/rz))) == 1 ){
+                    v[k][j][i].isOn = false;
+                }
+            }
+        }
+    }
 }
 
 void Sculptor::writeOFF(const char* filename){
-    int i,j,k,l,cont = 0;
+    int i,j,k,l = 0,cont = 0;
     int n_v, n_f;
 
     std::ofstream file;
@@ -156,22 +204,21 @@ void Sculptor::writeOFF(const char* filename){
     }
 
     //planos
-    for(l=0;l<cont; l++){
         for(k=0;k<nz;k++){
             for(j=0;j<ny;j++){
                 for(i=0;i<nx;i++){
                     if(v[k][j][i].isOn == true){
-                      file << "4 " << (8*l)+0 << " " << (8*l)+3 << " " << (8*l)+2 << " " << (8*l)+1 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                      file << "4 " << (8*l)+4 << " " << (8*l)+5 << " " << (8*l)+6 << " " << (8*l)+7 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                      file << "4 " << (8*l)+0 << " " << (8*l)+1 << " " << (8*l)+5 << " " << (8*l)+4 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                      file << "4 " << (8*l)+0 << " " << (8*l)+4 << " " << (8*l)+7 << " " << (8*l)+3 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                      file << "4 " << (8*l)+3 << " " << (8*l)+7 << " " << (8*l)+6 << " " << (8*l)+2 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
-                      file << "4 " << (8*l)+1 << " " << (8*l)+2 << " " << (8*l)+6 << " " << (8*l)+5 << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+0 << " " << (8*l)+3 << " " << (8*l)+2 << " " << (8*l)+1 << " " << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+4 << " " << (8*l)+5 << " " << (8*l)+6 << " " << (8*l)+7 << " " << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+0 << " " << (8*l)+1 << " " << (8*l)+5 << " " << (8*l)+4 << " " << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+0 << " " << (8*l)+4 << " " << (8*l)+7 << " " << (8*l)+3 << " " << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+3 << " " << (8*l)+7 << " " << (8*l)+6 << " " << (8*l)+2 << " " << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      file << "4 " << (8*l)+1 << " " << (8*l)+2 << " " << (8*l)+6 << " " << (8*l)+5 << " " << std::fixed << v[k][j][i].r << " " << std::fixed << v[k][j][i].g << " " << std::fixed << v[k][j][i].b << " " << v[k][j][i].a << std::endl;
+                      l++;
                     }
                 }
             }
         }
-    }
     file.close();
 }
 
