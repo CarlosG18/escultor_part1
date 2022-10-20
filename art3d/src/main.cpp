@@ -73,7 +73,6 @@ int main()
 
     mario.writeOFF("cabelo_mario1.off");
 
-
     return 0;
 }
 
