@@ -2,11 +2,6 @@
 #include <fstream>
 #include "Sculptor.h"
 
-/*Sculptor::Sculptor()
-{
-    //ctor
-}*/
-
 Sculptor::~Sculptor()
 {
     delete [] v[0][0];
@@ -135,7 +130,7 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
     for(k=0; k<nz; k++){
         for(j=0; j<ny; j++){
             for(i=0; i<nx; i++){
-                if(((((i-xcenter)/rx))*((i-xcenter)/rx))+(((j-ycenter)/ry)*((j-ycenter)/ry))+((((k-zcenter)/rz))*(((k-zcenter)/rz))) == 1 ){
+                if(((((float(i-xcenter)/rx))*(float(i-xcenter)/rx))+((float(j-ycenter)/ry)*(float(j-ycenter)/ry))+(((float(k-zcenter)/rz))*((float(k-zcenter)/rz)))) <= 1.0 ){
                     v[k][j][i].isOn = true;
                     v[k][j][i].r = r;
                     v[k][j][i].g = g;
@@ -153,7 +148,7 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
     for(k=0; k<nz; k++){
         for(j=0; j<ny; j++){
             for(i=0; i<nx; i++){
-                if(((((i-xcenter)/rx))*((i-xcenter)/rx))+(((j-ycenter)/ry)*((j-ycenter)/ry))+((((k-zcenter)/rz))*(((k-zcenter)/rz))) == 1 ){
+                if(((((float(i-xcenter)/rx))*(float(i-xcenter)/rx))+((float(j-ycenter)/ry)*(float(j-ycenter)/ry))+(((float(k-zcenter)/rz))*((float(k-zcenter)/rz)))) <= 1.0 ){
                     v[k][j][i].isOn = false;
                 }
             }
