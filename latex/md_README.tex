@@ -1,0 +1,89 @@
+Classe \char`\"{}escultor\char`\"{} para desenhos 3d no formato .OFF em c++ criado na disciplina de Programação avançada DCA1202 -\/ UFRN\hypertarget{md_README_autotoc_md1}{}\doxysection{Uso/\+Exemplos}\label{md_README_autotoc_md1}
+documentação\+: (link)
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\#include <iostream>}
+\DoxyCodeLine{\#include "{}Sculptor.h"{}}
+\DoxyCodeLine{\#include <iostream>}
+\DoxyCodeLine{}
+\DoxyCodeLine{using namespace std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{int main()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    Sculptor mario(24,32,1);}
+\DoxyCodeLine{    //chapeu e camisa}
+\DoxyCodeLine{    mario.setColor(1.0,0,0,1.0);}
+\DoxyCodeLine{    mario.putBox(0,1,3,8,0,0);}
+\DoxyCodeLine{    mario.putVoxel(1,2,0);}
+\DoxyCodeLine{    mario.putBox(1,1,9,11,0,0);}
+\DoxyCodeLine{    mario.putBox(8,9,1,3,0,0);}
+\DoxyCodeLine{    mario.cutVoxel(9,0,0);}
+\DoxyCodeLine{    mario.putVoxel(10,2,0);}
+\DoxyCodeLine{    mario.putBox(7,7,2,3,0,0);}
+\DoxyCodeLine{    mario.putBox(7,8,5,6,0,0);}
+\DoxyCodeLine{    mario.putBox(7,7,7,8,0,0);}
+\DoxyCodeLine{    mario.putBox(8,9,8,10,0,0);}
+\DoxyCodeLine{    mario.putVoxel(9,11,0);}
+\DoxyCodeLine{    mario.putVoxel(10,9,0);}
+\DoxyCodeLine{    //pele}
+\DoxyCodeLine{    mario.setColor(1.0,0.95,0.45,1.0);}
+\DoxyCodeLine{    mario.putBox(2,6,5,7,0,0);}
+\DoxyCodeLine{    mario.putBox(5,6,3,4,0,0);}
+\DoxyCodeLine{    mario.putBox(3,4,2,2,0,0);}
+\DoxyCodeLine{    mario.putVoxel(3,4,0);}
+\DoxyCodeLine{    mario.putBox(6,6,8,10,0,0);}
+\DoxyCodeLine{    mario.putVoxel(4,8,0);}
+\DoxyCodeLine{    mario.putBox(2,3,9,9,0,0);}
+\DoxyCodeLine{    mario.putBox(3,4,10,11,0,0);}
+\DoxyCodeLine{    mario.putVoxel(4,12,0);}
+\DoxyCodeLine{    mario.putBox(10,12,0,1,0,0);}
+\DoxyCodeLine{    mario.putVoxel(11,2,0);}
+\DoxyCodeLine{    mario.putBox(10,12,10,11,0,0);}
+\DoxyCodeLine{    mario.putVoxel(11,9,0);}
+\DoxyCodeLine{    //olho e bigode}
+\DoxyCodeLine{    mario.setColor(0,0,0,1.0);}
+\DoxyCodeLine{    mario.putBox(2,3,8,8,0,0);}
+\DoxyCodeLine{    mario.putBox(5,5,8,11,0,0);}
+\DoxyCodeLine{    mario.putVoxel(4,9,0);}
+\DoxyCodeLine{    //cabelo}
+\DoxyCodeLine{    mario.setColor(1,0.6,0.2,1.0);}
+\DoxyCodeLine{    mario.putBox(3,5,1,1,0,0);}
+\DoxyCodeLine{    mario.putBox(2,2,2,4,0,0);}
+\DoxyCodeLine{    mario.putBox(3,4,3,3,0,0);}
+\DoxyCodeLine{    mario.putVoxel(4,4,0);}
+\DoxyCodeLine{    mario.putVoxel(5,2,0);}
+\DoxyCodeLine{    //sapato}
+\DoxyCodeLine{    mario.putBox(14,15,1,3,0,0);}
+\DoxyCodeLine{    mario.putVoxel(15,0,0);}
+\DoxyCodeLine{    mario.putBox(14,15,8,10,0,0);}
+\DoxyCodeLine{    mario.putVoxel(15,11,0);}
+\DoxyCodeLine{    //macacao}
+\DoxyCodeLine{    mario.setColor(0,0,1.0,1.0);}
+\DoxyCodeLine{    mario.putBox(7,9,4,4,0,0);}
+\DoxyCodeLine{    mario.putBox(9,9,5,7,0,0);}
+\DoxyCodeLine{    mario.putVoxel(8,7,0);}
+\DoxyCodeLine{    mario.putBox(10,12,5,6,0,0);}
+\DoxyCodeLine{    mario.putBox(11,13,3,4,0,0);}
+\DoxyCodeLine{    mario.putBox(11,13,7,8,0,0);}
+\DoxyCodeLine{    mario.putVoxel(10,3,0);}
+\DoxyCodeLine{    mario.putVoxel(10,8,0);}
+\DoxyCodeLine{    mario.putBox(12,13,2,2,0,0);}
+\DoxyCodeLine{    mario.putBox(12,13,9,9,0,0);}
+\DoxyCodeLine{    //botao}
+\DoxyCodeLine{    mario.setColor(0,1.0,1.0,1.0);}
+\DoxyCodeLine{    mario.putVoxel(10,4,0);}
+\DoxyCodeLine{    mario.putVoxel(10,7,0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ }
+\DoxyCodeLine{   }
+\DoxyCodeLine{ mario.writeOFF("{}mario.off"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    return 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md2}{}\doxysection{Demonstração}\label{md_README_autotoc_md2}
+\hypertarget{md_README_autotoc_md3}{}\doxysection{Mais detalhes}\label{md_README_autotoc_md3}
+link para a página do criador (Agostinho Brito Jr) original do projeto\+: \href{https://agostinhobritojr.github.io/curso/progav-dca1202/escultor.html}{\texttt{ https\+://agostinhobritojr.\+github.\+io/curso/progav-\/dca1202/escultor.\+html}} 
