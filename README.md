@@ -6,8 +6,6 @@ Classe "escultor" para desenhos 3d no formato .OFF em c++ criado na disciplina d
 
 ## Uso/Exemplos
 
-documentação: content://com.sec.android.app.myfiles.FileProvider/device_storage/carlos_gabriel/escultor/art3d/include/html/classSculptor.html
-
 ```c++
 #include <iostream>
 #include "Sculptor.h"
