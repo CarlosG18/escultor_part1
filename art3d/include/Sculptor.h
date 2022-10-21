@@ -1,6 +1,7 @@
 class Sculptor {
 
-struct Voxel{                                             float r, g, b; // cores: vermelho, verde e azul
+struct Voxel{                                            
+    float r, g, b; // cores: vermelho, verde e azul
     float a; //transparencia               
     bool isOn; //"aparecer"                  
 };
