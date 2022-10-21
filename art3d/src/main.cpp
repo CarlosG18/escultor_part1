@@ -71,21 +71,36 @@ int main()
     mario.putVoxel(10,4,0);
     mario.putVoxel(10,7,0);
 
-    mario.writeOFF("cabelo_mario1.off");
+    mario.writeOFF("mario.off");
     
     int i;
     Sculptor mjolnir(40,40,70);
 
     //cabo do mjolnir
     mjolnir.setColor(0.42,0.21,0.21,1.0);
-    for(i=0;i<8;i++){
-        mjolnir.putBox(15,25,15,25,i*7,(i*7)+5);
+    for(i=1;i<8;i++){
+        mjolnir.putBox(17,23,17,23,i*7,(i*7)+5);
     }
+    mjolnir.setColor(0.81,0.81,0.81,1.0);
+    mjolnir.putSphere(20,20,4,7);
+    mjolnir.setColor(1.0,1.0,0,1.0);
+    for(i=1;i<8;i++){
+        mjolnir.putBox(17,23,17,23,(i*7)+6,(i*7)+6);
+    }
+
     //cabeça do mjolnir
-    mjolnir.setColor(1.0,1.0,1.0,1.0);
+    mjolnir.setColor(0.81,0.81,0.81,1.0);
     mjolnir.putBox(0,39,0,39,46,69);
-
-
+    //dobras 
+    for(i=0;i<8;i++){
+        //lado esquerdo
+        mjolnir.cutBox(i,i,0,39,46,52-i);
+        mjolnir.cutBox(0,7-i,39-i,39-i,46,69);
+        mjolnir.cutBox(0,7-i,0+i,0+i,46,69);
+        mjolnir.cutBox(0,7-i,0,39,69-i,69-i);
+        //lado direito
+    }
+    
     mjolnir.writeOFF("mjolnir.off");
 
     return 0;
