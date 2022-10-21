@@ -72,6 +72,21 @@ int main()
     mario.putVoxel(10,7,0);
 
     mario.writeOFF("cabelo_mario1.off");
+    
+    int i;
+    Sculptor mjolnir(40,40,70);
+
+    //cabo do mjolnir
+    mjolnir.setColor(0.42,0.21,0.21,1.0);
+    for(i=0;i<8;i++){
+        mjolnir.putBox(15,25,15,25,i*7,(i*7)+5);
+    }
+    //cabeça do mjolnir
+    mjolnir.setColor(1.0,1.0,1.0,1.0);
+    mjolnir.putBox(0,39,0,39,46,69);
+
+
+    mjolnir.writeOFF("mjolnir.off");
 
     return 0;
 }
