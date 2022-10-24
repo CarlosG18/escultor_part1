@@ -70,11 +70,7 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1){
     for(k=z0; k<=z1; k++){
         for(j=y0; j<=y1; j++){
             for(i=x0; i<=x1; i++){
-                v[k][j][i].isOn = true;
-                v[k][j][i].r = r;
-                v[k][j][i].g = g;
-                v[k][j][i].b = b;
-                v[k][j][i].a = a;
+                putVoxel(i,j,k);
             }
         }
     }
@@ -86,7 +82,7 @@ void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1){
     for(k=z0; k<=z1; k++){
         for(j=y0; j<=y1; j++){
             for(i=x0; i<=x1; i++){
-                v[k][j][i].isOn = false;
+                cutVoxel(i,j,k);
             }
         }
     }
@@ -99,11 +95,7 @@ void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius){
         for(j=0; j<ny; j++){
             for(i=0; i<nx; i++){
                 if((((i-xcenter)*(i-xcenter))+((j-ycenter)*(j-ycenter))+((k-zcenter)*(k-zcenter))) <= ((radius)*(radius))){
-                    v[k][j][i].isOn = true;
-                    v[k][j][i].r = r;
-                    v[k][j][i].g = g;
-                    v[k][j][i].b = b;
-                    v[k][j][i].a = a;
+                    putVoxel(i,j,k);
                 }
             }
         }
@@ -117,7 +109,7 @@ void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius){
         for(j=0; j<ny; j++){
             for(i=0; i<nx; i++){
                 if((((i-xcenter)*(i-xcenter))+((j-ycenter)*(j-ycenter))+((k-zcenter)*(k-zcenter))) <= ((radius)*(radius))){
-                    v[k][j][i].isOn = false;
+                    cutVoxel(i,j,k);
                 }
             }
         }
@@ -131,11 +123,7 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
         for(j=0; j<ny; j++){
             for(i=0; i<nx; i++){
                 if(((((float(i-xcenter)/rx))*(float(i-xcenter)/rx))+((float(j-ycenter)/ry)*(float(j-ycenter)/ry))+(((float(k-zcenter)/rz))*((float(k-zcenter)/rz)))) <= 1.0 ){
-                    v[k][j][i].isOn = true;
-                    v[k][j][i].r = r;
-                    v[k][j][i].g = g;
-                    v[k][j][i].b = b;
-                    v[k][j][i].a = a;
+                    putVoxel(i,j,k);
                 }
             }
         }
@@ -149,7 +137,7 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
         for(j=0; j<ny; j++){
             for(i=0; i<nx; i++){
                 if(((((float(i-xcenter)/rx))*(float(i-xcenter)/rx))+((float(j-ycenter)/ry)*(float(j-ycenter)/ry))+(((float(k-zcenter)/rz))*((float(k-zcenter)/rz)))) <= 1.0 ){
-                    v[k][j][i].isOn = false;
+                    cutVoxel(i,j,k);
                 }
             }
         }
