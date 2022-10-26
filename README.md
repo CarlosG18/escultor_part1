@@ -1,5 +1,5 @@
 
-# Escultor 3d 🎨
+# Escultor 3d - part 1 🎨
 
 Classe "escultor" para desenhos 3d no formato .OFF em c++ criado na disciplina de Programação avançada DCA1202 - UFRN
 
